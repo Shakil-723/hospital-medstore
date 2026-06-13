@@ -113,7 +113,6 @@ function Checkout() {
 
       <div style={styles.layout}>
         <div style={styles.formBox}>
-
           {/* ───── STEP 1: DELIVERY ───── */}
           {step === 1 && (
             <div>
@@ -121,33 +120,75 @@ function Checkout() {
               <div style={styles.grid2}>
                 <div style={styles.field}>
                   <label style={styles.label}>Full Name</label>
-                  <input style={styles.input} name="name" value={form.name} onChange={handle} placeholder="Dr. Rahul Sharma" />
+                  <input
+                    style={styles.input}
+                    name="name"
+                    value={form.name}
+                    onChange={handle}
+                    placeholder="Dr. Rahul Sharma"
+                  />
                 </div>
                 <div style={styles.field}>
                   <label style={styles.label}>Phone</label>
-                  <input style={styles.input} name="phone" value={form.phone} onChange={handle} placeholder="+91 98765 43210" />
+                  <input
+                    style={styles.input}
+                    name="phone"
+                    value={form.phone}
+                    onChange={handle}
+                    placeholder="+91 98765 43210"
+                  />
                 </div>
               </div>
               <div style={styles.field}>
                 <label style={styles.label}>Email</label>
-                <input style={styles.input} name="email" value={form.email} onChange={handle} placeholder="doctor@hospital.com" />
+                <input
+                  style={styles.input}
+                  name="email"
+                  value={form.email}
+                  onChange={handle}
+                  placeholder="doctor@hospital.com"
+                />
               </div>
               <div style={styles.field}>
                 <label style={styles.label}>Hospital Name</label>
-                <input style={styles.input} name="hospital" value={form.hospital} onChange={handle} placeholder="City General Hospital" />
+                <input
+                  style={styles.input}
+                  name="hospital"
+                  value={form.hospital}
+                  onChange={handle}
+                  placeholder="City General Hospital"
+                />
               </div>
               <div style={styles.field}>
                 <label style={styles.label}>Address</label>
-                <input style={styles.input} name="address" value={form.address} onChange={handle} placeholder="Building, Street, Area" />
+                <input
+                  style={styles.input}
+                  name="address"
+                  value={form.address}
+                  onChange={handle}
+                  placeholder="Building, Street, Area"
+                />
               </div>
               <div style={styles.grid2}>
                 <div style={styles.field}>
                   <label style={styles.label}>City</label>
-                  <input style={styles.input} name="city" value={form.city} onChange={handle} placeholder="Mumbai" />
+                  <input
+                    style={styles.input}
+                    name="city"
+                    value={form.city}
+                    onChange={handle}
+                    placeholder="Mumbai"
+                  />
                 </div>
                 <div style={styles.field}>
                   <label style={styles.label}>Pincode</label>
-                  <input style={styles.input} name="pincode" value={form.pincode} onChange={handle} placeholder="400001" />
+                  <input
+                    style={styles.input}
+                    name="pincode"
+                    value={form.pincode}
+                    onChange={handle}
+                    placeholder="400001"
+                  />
                 </div>
               </div>
               <button style={styles.nextBtn} onClick={() => setStep(2)}>
@@ -163,8 +204,8 @@ function Checkout() {
 
               {/* Payment Options */}
               {[
-                { value: "cod",  label: "💵 Cash on Delivery" },
-                { value: "upi",  label: "📱 UPI Payment" },
+                { value: "cod", label: "💵 Cash on Delivery" },
+                { value: "upi", label: "📱 UPI Payment" },
                 { value: "card", label: "💳 Credit / Debit Card" },
                 { value: "neft", label: "🏦 NEFT / Bank Transfer" },
               ].map((opt) => (
@@ -177,7 +218,9 @@ function Checkout() {
                   }}
                 >
                   <div style={styles.radio}>
-                    {form.payment === opt.value && <div style={styles.radioDot} />}
+                    {form.payment === opt.value && (
+                      <div style={styles.radioDot} />
+                    )}
                   </div>
                   {opt.label}
                 </div>
@@ -199,9 +242,10 @@ function Checkout() {
                         border: "2px solid #c3e8dc",
                       }}
                     />
-                    <p style={styles.upiIdText}>📱 UPI ID: 9102535315@ptaxis</p>
+                    <p style={styles.upiIdText}>UPI ID: {import.meta.env.VITE_UPI_ID}</p>
                     <p style={styles.upiHint}>
-                      Scan karo aur payment karo, phir Transaction ID neeche enter karo
+                      Scan karo aur payment karo, phir Transaction ID neeche
+                      enter karo
                     </p>
                   </div>
 
@@ -219,7 +263,7 @@ function Checkout() {
                 </div>
               )}
 
-              {/* ── Card Section ── */}
+          
               {form.payment === "card" && (
                 <div style={styles.payDetails}>
                   <div style={styles.field}>
@@ -229,7 +273,12 @@ function Checkout() {
                       name="cardNumber"
                       value={form.cardNumber}
                       onChange={(e) =>
-                        setForm({ ...form, cardNumber: e.target.value.replace(/\D/g, "").slice(0, 16) })
+                        setForm({
+                          ...form,
+                          cardNumber: e.target.value
+                            .replace(/\D/g, "")
+                            .slice(0, 16),
+                        })
                       }
                       placeholder="1234 5678 9012 3456"
                       maxLength={16}
@@ -254,7 +303,12 @@ function Checkout() {
                         name="cardCvv"
                         value={form.cardCvv}
                         onChange={(e) =>
-                          setForm({ ...form, cardCvv: e.target.value.replace(/\D/g, "").slice(0, 3) })
+                          setForm({
+                            ...form,
+                            cardCvv: e.target.value
+                              .replace(/\D/g, "")
+                              .slice(0, 3),
+                          })
                         }
                         placeholder="123"
                         type="password"
@@ -275,22 +329,42 @@ function Checkout() {
                 </div>
               )}
 
-              {/* ── NEFT Section ── */}
+           
               {form.payment === "neft" && (
                 <div style={styles.payDetails}>
-                  <p style={{ fontSize: "14px", color: "#555", marginBottom: "8px" }}>
+                  <p
+                    style={{
+                      fontSize: "14px",
+                      color: "#555",
+                      marginBottom: "8px",
+                    }}
+                  >
                     Bank transfer ke liye yeh details use karein:
                   </p>
-                  <div style={styles.neftRow}><span>Bank</span><span>Axis Bank</span></div>
-                  <div style={styles.neftRow}><span>Account No.</span><span>9102535315</span></div>
-                  <div style={styles.neftRow}><span>IFSC</span><span>UTIB0000001</span></div>
-                  <div style={styles.neftRow}><span>Name</span><span>Md Shakil Ansari</span></div>
+                  <div style={styles.neftRow}>
+                    <span>Bank</span>
+                    <span>{import.meta.env.VITE_BANK_NAME}</span>
+                  </div>
+                  <div style={styles.neftRow}>
+                    <span>Account No.</span>
+                    <span>{import.meta.env.VITE_ACCOUNT_NUMBER}</span>
+                  </div>
+                  <div style={styles.neftRow}>
+                    <span>IFSC</span>
+                    <span>{import.meta.env.VITE_IFSC}</span>
+                  </div>
+                  <div style={styles.neftRow}>
+                    <span>Name</span>
+                    <span>{import.meta.env.VITE_ACCOUNT_NAME}</span>
+                  </div>
                 </div>
               )}
 
               {/* Buttons */}
               <div style={styles.btnRow}>
-                <button style={styles.backBtn} onClick={() => setStep(1)}>← Back</button>
+                <button style={styles.backBtn} onClick={() => setStep(1)}>
+                  ← Back
+                </button>
                 <button
                   style={styles.nextBtn}
                   onClick={() => {
@@ -298,7 +372,13 @@ function Checkout() {
                       alert("Please enter UPI Transaction ID");
                       return;
                     }
-                    if (form.payment === "card" && (!form.cardNumber || !form.cardExpiry || !form.cardCvv || !form.cardName)) {
+                    if (
+                      form.payment === "card" &&
+                      (!form.cardNumber ||
+                        !form.cardExpiry ||
+                        !form.cardCvv ||
+                        !form.cardName)
+                    ) {
                       alert("Please fill all card details");
                       return;
                     }
@@ -311,21 +391,38 @@ function Checkout() {
             </div>
           )}
 
-          {/* ───── STEP 3: REVIEW ───── */}
+         
           {step === 3 && (
             <div>
               <h3 style={styles.stepTitle}>Review Order</h3>
               <div style={styles.reviewBox}>
-                <div style={styles.reviewRow}><span>Name</span><span>{form.name || "N/A"}</span></div>
-                <div style={styles.reviewRow}><span>Hospital</span><span>{form.hospital || "N/A"}</span></div>
+                <div style={styles.reviewRow}>
+                  <span>Name</span>
+                  <span>{form.name || "N/A"}</span>
+                </div>
+                <div style={styles.reviewRow}>
+                  <span>Hospital</span>
+                  <span>{form.hospital || "N/A"}</span>
+                </div>
                 <div style={styles.reviewRow}>
                   <span>Address</span>
-                  <span>{form.address}, {form.city} - {form.pincode}</span>
+                  <span>
+                    {form.address}, {form.city} - {form.pincode}
+                  </span>
                 </div>
-                <div style={styles.reviewRow}><span>Phone</span><span>{form.phone || "N/A"}</span></div>
+                <div style={styles.reviewRow}>
+                  <span>Phone</span>
+                  <span>{form.phone || "N/A"}</span>
+                </div>
                 <div style={styles.reviewRow}>
                   <span>Payment</span>
-                  <span style={{ textTransform: "uppercase", color: "#0F6E56", fontWeight: "600" }}>
+                  <span
+                    style={{
+                      textTransform: "uppercase",
+                      color: "#0F6E56",
+                      fontWeight: "600",
+                    }}
+                  >
                     {form.payment}
                   </span>
                 </div>
@@ -343,14 +440,19 @@ function Checkout() {
                 )}
               </div>
               <div style={styles.btnRow}>
-                <button style={styles.backBtn} onClick={() => setStep(2)}>← Back</button>
-                <button style={styles.placeBtn} onClick={placeOrder} disabled={loading}>
+                <button style={styles.backBtn} onClick={() => setStep(2)}>
+                  ← Back
+                </button>
+                <button
+                  style={styles.placeBtn}
+                  onClick={placeOrder}
+                  disabled={loading}
+                >
                   {loading ? "Placing Order..." : "✅ Place Order"}
                 </button>
               </div>
             </div>
           )}
-
         </div>
 
         {/* ORDER SUMMARY */}
@@ -359,7 +461,9 @@ function Checkout() {
           {cartItems.length > 0 ? (
             cartItems.map((item, i) => (
               <div key={i} style={styles.summaryRow}>
-                <span>{item.name} x{item.qty}</span>
+                <span>
+                  {item.name} x{item.qty}
+                </span>
                 <span>₹{(item.price * item.qty).toLocaleString()}</span>
               </div>
             ))
@@ -373,7 +477,13 @@ function Checkout() {
             <span>Shipping</span>
             <span style={{ color: "#0F6E56" }}>FREE</span>
           </div>
-          <div style={{ ...styles.summaryRow, fontWeight: "700", fontSize: "17px" }}>
+          <div
+            style={{
+              ...styles.summaryRow,
+              fontWeight: "700",
+              fontSize: "17px",
+            }}
+          >
             <span>Total</span>
             <span>₹{totalAmount.toLocaleString()}</span>
           </div>
@@ -385,43 +495,202 @@ function Checkout() {
 
 const styles = {
   page: { padding: "32px" },
-  title: { fontSize: "24px", fontWeight: "600", marginBottom: "28px", color: "#222" },
+  title: {
+    fontSize: "24px",
+    fontWeight: "600",
+    marginBottom: "28px",
+    color: "#222",
+  },
   steps: { display: "flex", gap: "32px", marginBottom: "32px" },
   stepItem: { display: "flex", alignItems: "center", gap: "8px" },
-  stepCircle: { width: "32px", height: "32px", borderRadius: "50%", background: "#eee", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "14px", fontWeight: "600", color: "#aaa" },
+  stepCircle: {
+    width: "32px",
+    height: "32px",
+    borderRadius: "50%",
+    background: "#eee",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "14px",
+    fontWeight: "600",
+    color: "#aaa",
+  },
   stepActive: { background: "#0F6E56", color: "#fff" },
   stepLabel: { fontSize: "13px", color: "#aaa", fontWeight: "500" },
   layout: { display: "grid", gridTemplateColumns: "1fr 300px", gap: "32px" },
-  formBox: { background: "#fff", border: "1px solid #eee", borderRadius: "12px", padding: "28px" },
-  stepTitle: { fontSize: "18px", fontWeight: "600", marginBottom: "20px", color: "#222" },
+  formBox: {
+    background: "#fff",
+    border: "1px solid #eee",
+    borderRadius: "12px",
+    padding: "28px",
+  },
+  stepTitle: {
+    fontSize: "18px",
+    fontWeight: "600",
+    marginBottom: "20px",
+    color: "#222",
+  },
   grid2: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" },
   field: { marginBottom: "16px" },
-  label: { display: "block", fontSize: "13px", color: "#555", marginBottom: "6px", fontWeight: "500" },
-  input: { width: "100%", padding: "10px 14px", border: "1px solid #ddd", borderRadius: "8px", fontSize: "14px", outline: "none", boxSizing: "border-box" },
-  nextBtn: { background: "#0F6E56", color: "#fff", border: "none", padding: "12px 28px", borderRadius: "8px", fontSize: "15px", fontWeight: "600", cursor: "pointer", marginTop: "8px" },
-  backBtn: { background: "#f5f5f5", color: "#555", border: "1px solid #ddd", padding: "12px 24px", borderRadius: "8px", fontSize: "14px", cursor: "pointer" },
-  placeBtn: { background: "#0F6E56", color: "#fff", border: "none", padding: "12px 28px", borderRadius: "8px", fontSize: "15px", fontWeight: "600", cursor: "pointer" },
+  label: {
+    display: "block",
+    fontSize: "13px",
+    color: "#555",
+    marginBottom: "6px",
+    fontWeight: "500",
+  },
+  input: {
+    width: "100%",
+    padding: "10px 14px",
+    border: "1px solid #ddd",
+    borderRadius: "8px",
+    fontSize: "14px",
+    outline: "none",
+    boxSizing: "border-box",
+  },
+  nextBtn: {
+    background: "#0F6E56",
+    color: "#fff",
+    border: "none",
+    padding: "12px 28px",
+    borderRadius: "8px",
+    fontSize: "15px",
+    fontWeight: "600",
+    cursor: "pointer",
+    marginTop: "8px",
+  },
+  backBtn: {
+    background: "#f5f5f5",
+    color: "#555",
+    border: "1px solid #ddd",
+    padding: "12px 24px",
+    borderRadius: "8px",
+    fontSize: "14px",
+    cursor: "pointer",
+  },
+  placeBtn: {
+    background: "#0F6E56",
+    color: "#fff",
+    border: "none",
+    padding: "12px 28px",
+    borderRadius: "8px",
+    fontSize: "15px",
+    fontWeight: "600",
+    cursor: "pointer",
+  },
   btnRow: { display: "flex", gap: "12px", marginTop: "20px" },
-  payOption: { display: "flex", alignItems: "center", gap: "12px", padding: "14px 16px", border: "1px solid #ddd", borderRadius: "10px", marginBottom: "12px", cursor: "pointer", fontSize: "14px" },
+  payOption: {
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+    padding: "14px 16px",
+    border: "1px solid #ddd",
+    borderRadius: "10px",
+    marginBottom: "12px",
+    cursor: "pointer",
+    fontSize: "14px",
+  },
   payActive: { border: "2px solid #0F6E56", background: "#f0faf6" },
-  radio: { width: "18px", height: "18px", borderRadius: "50%", border: "2px solid #0F6E56", display: "flex", alignItems: "center", justifyContent: "center" },
-  radioDot: { width: "8px", height: "8px", borderRadius: "50%", background: "#0F6E56" },
-  payDetails: { marginTop: "4px", marginBottom: "8px", padding: "16px", background: "#f0faf6", borderRadius: "10px", border: "1px solid #c3e8dc" },
-  upiIdText: { fontSize: "14px", color: "#0F6E56", fontWeight: "700", marginTop: "10px", marginBottom: "4px" },
+  radio: {
+    width: "18px",
+    height: "18px",
+    borderRadius: "50%",
+    border: "2px solid #0F6E56",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  radioDot: {
+    width: "8px",
+    height: "8px",
+    borderRadius: "50%",
+    background: "#0F6E56",
+  },
+  payDetails: {
+    marginTop: "4px",
+    marginBottom: "8px",
+    padding: "16px",
+    background: "#f0faf6",
+    borderRadius: "10px",
+    border: "1px solid #c3e8dc",
+  },
+  upiIdText: {
+    fontSize: "14px",
+    color: "#0F6E56",
+    fontWeight: "700",
+    marginTop: "10px",
+    marginBottom: "4px",
+  },
   upiHint: { fontSize: "12px", color: "#777", marginBottom: "12px" },
-  neftRow: { display: "flex", justifyContent: "space-between", fontSize: "14px", color: "#444", padding: "8px 0", borderBottom: "1px solid #dce8e4" },
-  reviewBox: { background: "#f9f9f9", borderRadius: "10px", padding: "20px", marginBottom: "20px" },
-  reviewRow: { display: "flex", justifyContent: "space-between", fontSize: "14px", color: "#555", marginBottom: "12px" },
-  summary: { background: "#fff", border: "1px solid #eee", borderRadius: "12px", padding: "24px", height: "fit-content" },
-  summaryTitle: { fontSize: "17px", fontWeight: "600", marginBottom: "16px", color: "#222" },
-  summaryRow: { display: "flex", justifyContent: "space-between", fontSize: "14px", color: "#555", marginBottom: "10px" },
+  neftRow: {
+    display: "flex",
+    justifyContent: "space-between",
+    fontSize: "14px",
+    color: "#444",
+    padding: "8px 0",
+    borderBottom: "1px solid #dce8e4",
+  },
+  reviewBox: {
+    background: "#f9f9f9",
+    borderRadius: "10px",
+    padding: "20px",
+    marginBottom: "20px",
+  },
+  reviewRow: {
+    display: "flex",
+    justifyContent: "space-between",
+    fontSize: "14px",
+    color: "#555",
+    marginBottom: "12px",
+  },
+  summary: {
+    background: "#fff",
+    border: "1px solid #eee",
+    borderRadius: "12px",
+    padding: "24px",
+    height: "fit-content",
+  },
+  summaryTitle: {
+    fontSize: "17px",
+    fontWeight: "600",
+    marginBottom: "16px",
+    color: "#222",
+  },
+  summaryRow: {
+    display: "flex",
+    justifyContent: "space-between",
+    fontSize: "14px",
+    color: "#555",
+    marginBottom: "10px",
+  },
   divider: { borderTop: "1px solid #eee", margin: "14px 0" },
   success: { textAlign: "center", padding: "80px 32px" },
   successIcon: { fontSize: "64px", marginBottom: "16px" },
-  successTitle: { fontSize: "28px", fontWeight: "700", color: "#0F6E56", marginBottom: "12px" },
+  successTitle: {
+    fontSize: "28px",
+    fontWeight: "700",
+    color: "#0F6E56",
+    marginBottom: "12px",
+  },
   successDesc: { fontSize: "15px", color: "#666", marginBottom: "16px" },
-  orderNum: { background: "#f0faf6", color: "#0F6E56", padding: "10px 24px", borderRadius: "8px", display: "inline-block", fontWeight: "600", marginBottom: "24px" },
-  homeBtn: { display: "inline-block", background: "#0F6E56", color: "#fff", padding: "12px 32px", borderRadius: "8px", textDecoration: "none", fontWeight: "600" },
+  orderNum: {
+    background: "#f0faf6",
+    color: "#0F6E56",
+    padding: "10px 24px",
+    borderRadius: "8px",
+    display: "inline-block",
+    fontWeight: "600",
+    marginBottom: "24px",
+  },
+  homeBtn: {
+    display: "inline-block",
+    background: "#0F6E56",
+    color: "#fff",
+    padding: "12px 32px",
+    borderRadius: "8px",
+    textDecoration: "none",
+    fontWeight: "600",
+  },
 };
 
 export default Checkout;
